@@ -1,4 +1,5 @@
 const { join } = require('path')
+const s = require('chalk')
 const program = require('commander')
 
 const { version } = require('../package.json')
@@ -10,9 +11,9 @@ function init(args){
     program
     .version(version, '-v, --version', 'Mostra a Versão da Ferramenta')
     .option('-t --token [token]', 'API Token from Advisor Climatempo')
-    .arguments('<cityName...>')//parâmetro obrigatório
+    .arguments('<cityName...>')//parâmetro obrigatório '<>' | os '...' serve para concatenar espaços possíveis e torná-los em um único parâmetro
     .description('Mostra o clima de uma cidade em tempo real')
-    .action(async (cityName) =>{
+    .action(async (cityName) =>{//city name é um parâmetro do callback
         if(program.token) await setToken(program.token)
         getForecast(cityName.join(' '))
     })

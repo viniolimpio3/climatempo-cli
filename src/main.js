@@ -1,9 +1,12 @@
+const s = require('chalk')
 const { getCityForecast, getCityID } = require('./utils/requests')
 
 async function getForecast(cityName){
     try{
         const cityID = await getCityID(cityName)
         const cityForecast = await getCityForecast(cityID)
+
+        if(cityForecast.error) console.log(s.bold.red('Ocorreu algum erro!'))
 
         console.log(`
             Clima em ${cityForecast.name}, ${cityForecast.state}:

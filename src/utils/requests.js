@@ -9,7 +9,8 @@ async function getCityID(cityName){
         const appToken = await getToken();
         const responseCity = await fetch(`${apiUrl}/locale/city?name=${encodeURI(cityName)}&token=${appToken}`)
         const cityJson = await responseCity.json();
-
+        console.log(cityJson,' json')
+        
         if(!cityJson.length){
             if(cityJson.detail) throw new Error(cityJson.detail)
 
@@ -26,6 +27,8 @@ async function getCityForecast(cityID){
     try{
         const appToken = await getToken();
         const responseWeather = await fetch(`${apiUrl}/weather/locale/${cityID}/current?token=${appToken}`)
+
+        console.log(responseWeather, 'response')
         const weatherJson = await responseWeather.json();
 
         return {
